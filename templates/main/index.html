@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inventário - Anhanguera</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Lista de Salas</h2>
+            <ul>
+                {% for sala in salas %}
+                    <li>{{ sala.nome }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="content">
+            <div class="section">
+                <h2>Tabela de Informações</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome da Sala</th>
+                            <th>Capacidade</th>
+                            <th>Equipamentos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sala in salas %}
+                            <tr>
+                                <td>{{ sala.nome }}</td>
+                                <td>{{ sala.capacidade }}</td>
+                                <td>
+                                    {% for equipamento in sala.equipamentos.all %}
+                                        {{ equipamento.nome }}<br>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="section">
+                <h2>Tabela de Chamados</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Data de Abertura</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for chamado in chamados %}
+                            <tr>
+                                <td>{{ chamado.descricao }}</td>
+                                <td>{{ chamado.data_abertura }}</td>
+                                <td>{{ chamado.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
